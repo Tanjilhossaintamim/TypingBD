@@ -131,7 +131,7 @@ function calculateResult() {
         
         <div class="stat-item"><span class="stat-label">Correct Words:</span> <span class="stat-value">${correctWords}</span></div>
         <div class="stat-item"><span class="stat-label">Result:</span>
-        ${accuracy < 95 ? ` <span class="stat-value failed">FAILED</span>` : ` <span class="stat-value passed">PASSED</span></div>`}
+        ${accuracy > 95 && wpm >= 20 ? ` <span class="stat-value passed">PASSED</span>` : ` <span class="stat-value failed">FAILED</span></div>`}
        
         </div>
         <div class="stat-item"><span class="stat-label">Total Mistakes:</span> <span class="stat-value">${mistakes}</span></div>
