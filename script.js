@@ -43,7 +43,11 @@ function handleFirstInput() {
 function updateTimer() {
   timeLeft--;
   updateResultUI(`সময় বাকি: ${formatTime(timeLeft)}`);
-  if (timeLeft <= 0) endTest();
+  if (timeLeft == 120) speakWarning("You Have two minutes Left!");
+  if (timeLeft <= 0) {
+    speakWarning("Time Up!");
+    endTest();
+  }
 }
 
 function endTest() {
@@ -140,4 +144,11 @@ function calculateResult() {
     `;
 
   document.getElementById("reviewBox").innerHTML = reviewHTML;
+}
+function speakWarning(message) {
+  const speech = new SpeechSynthesisUtterance(message);
+  speech.lang = "en-US"; // ভাষা সেট করা
+  speech.volume = 1; // ভলিউম (০ থেকে ১)
+  speech.rate = 1; // কথা বলার গতি
+  window.speechSynthesis.speak(speech);
 }
