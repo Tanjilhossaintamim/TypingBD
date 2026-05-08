@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bangla Typing Test</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>টাইপিং টেস্ট</h1>
+
+        <label>শীটের লেখা পেস্ট করুন</label>
+        <textarea id="sourceText"></textarea>
+
+        <div class="controls">
+            <input type="number" id="timeInput" value="5" min="1">
+            <span>মিনিট</span>
+            <button onclick="startTest()">Start Test</button>
+        </div>
+
+        <div class="box">
+            <h3>Reference</h3>
+            <div id="referenceBox" class="reference"></div>
+        </div>
+
+        <div class="box">
+            <h3>Result Details</h3>
+            <div id="result" class="stats-grid">
+                রেডি? টেস্ট শুরু করতে টাইপ করুন।
+            </div>
+        </div>
+
+        <textarea id="typingArea" disabled placeholder="এখানে টাইপ করুন..."></textarea>
+
+        <div class="box">
+            <h3>Review</h3>
+            <div id="reviewBox" class="review"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
