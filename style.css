@@ -132,13 +132,47 @@ h3 {
 /* ভুলের নিচে লাল আন্ডারলাইন (আপনার রেফারেন্স অনুযায়ী) */
 
 .wrong-word {
-    text-decoration: underline;
+    text-decoration: underline wavy;
     text-decoration-color: #ff0000;
     /* Bright Red */
     text-decoration-thickness: 2px;
     text-underline-offset: 5px;
+    cursor: pointer;
+    position: relative;
 
     /* Creates that nice gap below the text */
+}
+
+/* হোভার করলে যে বক্সটি দেখাবে (Tooltip) */
+.wrong-word:hover::after {
+    content: attr(data-title);
+    /* data-title থেকে টেক্সট নিবে */
+    position: absolute;
+    bottom: 125%;
+    /* শব্দের উপরে দেখানোর জন্য */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    font-size: 14px;
+    z-index: 10;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* নিচের ছোট্ট তীরের (Arrow) মতো অংশটি */
+.wrong-word:hover::before {
+    content: "";
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+    z-index: 10;
 }
 
 .stats-grid {

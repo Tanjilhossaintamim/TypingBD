@@ -102,7 +102,7 @@ function calculateResult() {
       reviewHTML += `<span >${word}</span> `;
     } else {
       mistakes++;
-      reviewHTML += `<span class="wrong-word">${word}</span> `;
+      reviewHTML += `<span class="wrong-word" data-title="${sourceWords[i]}">${word}</span> `;
     }
   });
 
