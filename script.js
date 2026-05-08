@@ -15,7 +15,7 @@ function startTest() {
 
   // UI Update
   updateResultUI(
-    `সময় বাকি: ${formatTime(timeLeft)} (টাইপ শুরু করলে সময় গণনা শুরু হবে)`
+    `সময় বাকি: ${formatTime(timeLeft)} (টাইপ শুরু করলে সময় গণনা শুরু হবে)`,
   );
 
   const typingArea = document.getElementById("typingArea");
@@ -77,47 +77,49 @@ function resetTest() {
   document.getElementById("result").innerHTML = "WPM: 0 | Accuracy: 0%";
   document.getElementById("reviewBox").innerHTML = "";
 
-//   // Keep sourceText as it is, just refocus the start button
-//   alert("রেডি? আবার শুরু করতে Start Test বাটনে ক্লিক করুন।");
+  //   // Keep sourceText as it is, just refocus the start button
+  //   alert("রেডি? আবার শুরু করতে Start Test বাটনে ক্লিক করুন।");
 }
 
 function calculateResult() {
-    const sourceText = document.getElementById("sourceText").value.trim();
-    const typedText = document.getElementById("typingArea").value.trim();
-    const initialMinutes = parseInt(document.getElementById("timeInput").value);
+  const sourceText = document.getElementById("sourceText").value.trim();
+  const typedText = document.getElementById("typingArea").value.trim();
+  const initialMinutes = parseInt(document.getElementById("timeInput").value);
 
-    // ক্যালকুলেশন লজিক
-    const sourceWords = sourceText.split(/\s+/);
-    const typedWords = typedText.split(/\s+/);
-    const totalCharsWithSpace = typedText.length;
-    const totalCharsWithoutSpace = typedText.replace(/\s+/g, '').length;
-    
-    let correctWords = 0;
-    let mistakes = 0;
-    let reviewHTML = "";
+  // ক্যালকুলেশন লজিক
+  const sourceWords = sourceText.split(/\s+/);
+  const typedWords = typedText.split(/\s+/);
+  const totalCharsWithSpace = typedText.length;
+  const totalCharsWithoutSpace = typedText.replace(/\s+/g, "").length;
 
-    typedWords.forEach((word, i) => {
-        if (word === sourceWords[i]) {
-            correctWords++;
-            reviewHTML += `<span>${word}</span> `;
-        } else {
-            mistakes++;
-            reviewHTML += `<span class="wrong-word">${word}</span> `;
-        }
-    });
+  let correctWords = 0;
+  let mistakes = 0;
+  let reviewHTML = "";
 
-    // সময় হিসাব
-    const timeSpentSeconds = (initialMinutes * 60) - timeLeft;
-    const durationMin = Math.floor(timeSpentSeconds / 60);
-    const durationSec = timeSpentSeconds % 60;
-    const timeSpentMinutes = timeSpentSeconds / 60 || 0.1;
+  typedWords.forEach((word, i) => {
+    if (word === sourceWords[i]) {
+      correctWords++;
+      reviewHTML += `<span >${word}</span> `;
+    } else {
+      mistakes++;
+      reviewHTML += `<span class="wrong-word">${word}</span> `;
+    }
+  });
 
-    // WPM এবং Accuracy
-    const wpm = Math.round(correctWords / timeSpentMinutes);
-    const accuracy = typedWords.length ? Math.round((correctWords / typedWords.length) * 100) : 0;
+  // সময় হিসাব
+  const timeSpentSeconds = initialMinutes * 60 - timeLeft;
+  const durationMin = Math.floor(timeSpentSeconds / 60);
+  const durationSec = timeSpentSeconds % 60;
+  const timeSpentMinutes = timeSpentSeconds / 60 || 0.1;
 
-    // ছবির মতো রেজাল্ট ডিজাইন
-    document.getElementById("result").innerHTML = `
+  // WPM এবং Accuracy
+  const wpm = Math.round(correctWords / timeSpentMinutes);
+  const accuracy = typedWords.length
+    ? Math.round((correctWords / typedWords.length) * 100)
+    : 0;
+
+  // ছবির মতো রেজাল্ট ডিজাইন
+  document.getElementById("result").innerHTML = `
         <div class="stat-item"><span class="stat-label">WPM (Word-based):</span> <span class="stat-value">${wpm}</span></div>
         <div class="stat-item"><span class="stat-label">Characters (With Space):</span> <span class="stat-value">${totalCharsWithSpace}</span></div>
         
@@ -128,12 +130,14 @@ function calculateResult() {
         <div class="stat-item"><span class="stat-label">Duration:</span> <span class="stat-value">${durationMin} min ${durationSec} sec</span></div>
         
         <div class="stat-item"><span class="stat-label">Correct Words:</span> <span class="stat-value">${correctWords}</span></div>
-        <div class="stat-item"><span class="stat-label">Result:</span> <span class="stat-value failed">${accuracy < 95 ? 'FAILED' : 'PASSED'}</span></div>
-        
+        <div class="stat-item"><span class="stat-label">Result:</span>
+        ${accuracy < 95 ? ` <span class="stat-value failed">FAILED</span>` : ` <span class="stat-value passed">PASSED</span></div>`}
+       
+        </div>
         <div class="stat-item"><span class="stat-label">Total Mistakes:</span> <span class="stat-value">${mistakes}</span></div>
         
         <button class="btn-reset" onclick="resetTest()">Try Again</button>
     `;
 
-    document.getElementById("reviewBox").innerHTML = reviewHTML;
+  document.getElementById("reviewBox").innerHTML = reviewHTML;
 }
