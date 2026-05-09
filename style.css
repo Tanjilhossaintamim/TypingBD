@@ -106,7 +106,7 @@ h3 {
 }
 
 
-.reference,
+/* .reference, */
 .review {
     background: #fafafa;
     padding: 20px;
@@ -117,6 +117,22 @@ h3 {
     min-height: 50px;
     word-wrap: break-word;
 
+}
+
+.reference {
+    overflow: scroll;
+    background: #fafafa;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    font-size: 20px;
+    line-height: 2;
+    max-height: 300px;
+
+}
+
+.reference::-webkit-scrollbar {
+    display: none;
 }
 
 #result {

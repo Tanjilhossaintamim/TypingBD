@@ -2,8 +2,24 @@ let timer;
 let timeLeft = 0;
 let isTestRunning = false;
 
+const textBox = document.getElementById("sourceText");
+const startButton = document.getElementById("startButton");
+const timeBox = document.getElementById("timeInput");
+
+function changeState(state) {
+  if (state == "true") {
+    textBox.disabled = true;
+    startButton.disabled = true;
+    timeBox.disabled = true;
+  } else {
+    textBox.disabled = false;
+    startButton.disabled = false;
+    timeBox.disabled = false;
+    document.getElementById("referenceBox").innerText = "";
+  }
+}
 function startTest() {
-  const source = document.getElementById("sourceText").value.trim();
+  const source = textBox.value.trim();
   if (!source) return alert("অনুগ্রহ করে আগে টেক্সট পেস্ট করুন!");
 
   const minutes = parseInt(document.getElementById("timeInput").value) || 5;
@@ -15,7 +31,7 @@ function startTest() {
 
   // UI Update
   updateResultUI(
-    `সময় বাকি: ${formatTime(timeLeft)} (টাইপ শুরু করলে সময় গণনা শুরু হবে)`,
+    `সময় বাকি:${formatTime(timeLeft)}(টাইপ শুরু করলে সময় গণনা শুরু হবে)`,
   );
 
   const typingArea = document.getElementById("typingArea");
@@ -28,6 +44,8 @@ function startTest() {
 
   // Start timer on first input
   typingArea.addEventListener("input", handleFirstInput);
+  // disabled textarea and startButton
+  changeState("true");
 }
 
 function handleFirstInput() {
@@ -55,6 +73,7 @@ function endTest() {
   isTestRunning = false;
   document.getElementById("typingArea").disabled = true;
   calculateResult();
+  changeState("true");
 }
 
 function updateResultUI(message) {
@@ -81,8 +100,8 @@ function resetTest() {
   document.getElementById("result").innerHTML = "WPM: 0 | Accuracy: 0%";
   document.getElementById("reviewBox").innerHTML = "";
 
-  //   // Keep sourceText as it is, just refocus the start button
-  //   alert("রেডি? আবার শুরু করতে Start Test বাটনে ক্লিক করুন।");
+  changeState("false");
+  textBox.focus();
 }
 
 function calculateResult() {
