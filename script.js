@@ -61,9 +61,10 @@ function handleFirstInput() {
 function updateTimer() {
   timeLeft--;
   updateResultUI(`সময় বাকি: ${formatTime(timeLeft)}`);
-  if (timeLeft == 120) speakWarning("You Have two minutes Left!");
+  if (timeLeft == 120)
+    speakWarning("./audio/TTSOL-bn-BD-Nabanita-20260509-204129.mp3");
   if (timeLeft <= 0) {
-    speakWarning("Time Up!");
+    speakWarning("./audio/TTSOL-bn-IN-Bashkar-20260509-204237.mp3");
     endTest();
   }
 }
@@ -164,10 +165,9 @@ function calculateResult() {
 
   document.getElementById("reviewBox").innerHTML = reviewHTML;
 }
-function speakWarning(message) {
-  const speech = new SpeechSynthesisUtterance(message);
-  speech.lang = "en-US"; // ভাষা সেট করা
-  speech.volume = 1; // ভলিউম (০ থেকে ১)
-  speech.rate = 1; // কথা বলার গতি
-  window.speechSynthesis.speak(speech);
+function speakWarning(source) {
+  const audio = new Audio(source);
+  audio.play().catch((error) => {
+    console.log("Playback failed. User must interact with the page first.");
+  });
 }
