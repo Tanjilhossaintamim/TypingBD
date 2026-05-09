@@ -148,13 +148,14 @@ h3 {
 /* ভুলের নিচে লাল আন্ডারলাইন (আপনার রেফারেন্স অনুযায়ী) */
 
 .wrong-word {
-    text-decoration: underline wavy;
+    text-decoration: line-through;
     text-decoration-color: #ff0000;
     /* Bright Red */
-    text-decoration-thickness: 2px;
-    text-underline-offset: 5px;
+    text-decoration-thickness: 1px;
+    color: #DC143C;
     cursor: pointer;
     position: relative;
+
 
     /* Creates that nice gap below the text */
 }
@@ -189,6 +190,12 @@ h3 {
     border-style: solid;
     border-color: #333 transparent transparent transparent;
     z-index: 10;
+}
+
+.correct-word {
+    color: #27ae60;
+    margin-left: 3px;
+    margin-right: 3px;
 }
 
 .stats-grid {
